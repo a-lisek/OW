@@ -1,0 +1,9 @@
+% Funkcja pomocnicza wypisujaca statyczny tekst na wybrana figure,
+% wykorzystywana przez funkcje animujace
+function plotStaticText(fig)
+        set(0,'CurrentFigure',fig);
+        uicontrol('Style', 'text',...
+       'String', 'Liczba porównañ:',...
+       'Units','normalized',...
+       'Position', [0.68 0.6 0.16 0.05], 'BackgroundColor', [0.8 0.8 0.8],'HorizontalAlignment', 'left','FontSize', 10); 
+end
