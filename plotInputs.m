@@ -159,11 +159,13 @@ function plotInputs(fig, input, compared, nonDominated, dominated, tit, last)
         
         % rysuj punkty obecnie porownywane
         if(size(compared,1)>0 )
-            scatter3(compared(1,:), compared(2, :), compared(3, :), mrk_size, compared(4, :)', 's', 'LineWidth',1,...
+            s=scatter3(compared(1,:), compared(2, :), compared(3, :), mrk_size, compared(4, :)', 's', 'LineWidth',1,...
                 'MarkerEdgeColor','k',...
                 'MarkerFaceColor',[1 .1 .0]) ;
+            row=dataTipTextRow('W',compared(4,:));
+            s.DataTipTemplate.DataTipRows(end+1)=row;
         else
-            scatter3(-1000, -1000 , -1000, mrk_size, 0, 's', 'LineWidth',1,...
+            s=scatter3(-1000, -1000 , -1000, mrk_size, 0, 's', 'LineWidth',1,...
                 'MarkerEdgeColor','k',...
                 'MarkerFaceColor',[1 .1 .0]) ;
         
@@ -174,7 +176,9 @@ function plotInputs(fig, input, compared, nonDominated, dominated, tit, last)
         
         % rysuj wszystkie punkty
 
-        scatter3(input(1,:), input(2, :), input(3,:),mrk_size*2,input(4,:), '.', 'LineWidth',12) ;
+        s=scatter3(input(1,:), input(2, :), input(3,:),mrk_size*2,input(4,:), '.', 'LineWidth',12) ;
+        row=dataTipTextRow('W',input(4,:));
+        s.DataTipTemplate.DataTipRows(end+1)=row;
 
 
         hold on
@@ -194,20 +198,24 @@ function plotInputs(fig, input, compared, nonDominated, dominated, tit, last)
 
         % rysuj punkty niezdominowane
         if(size(nonDominated,1) >0)
-            scatter3(nonDominated(1,:), nonDominated(2, :), nonDominated(3, :), mrk_size, nonDominated(4, :)',  'd', 'LineWidth',1,...
+            s=scatter3(nonDominated(1,:), nonDominated(2, :), nonDominated(3, :), mrk_size, nonDominated(4, :)',  'd', 'LineWidth',1,...
                 'MarkerEdgeColor','k',...
                 'MarkerFaceColor','c') ;
+            row=dataTipTextRow('W',nonDominated(4,:));
+            s.DataTipTemplate.DataTipRows(end+1)=row;
         else
-            scatter3(-1000, -1000 , -1000, mrk_size, 0,  'd', 'LineWidth',1,...
+            s=scatter3(-1000, -1000 , -1000, mrk_size, 0,  'd', 'LineWidth',1,...
                 'MarkerEdgeColor','k',...
                 'MarkerFaceColor','c') ;
         end
 
         % rysuj punkty zdominowane
         if (size(dominated,1) >0 )
-            scatter3(dominated(1,:), dominated(2, :), dominated(3, :), mrk_size*0.8, dominated(4, :)', 'o','MarkerFaceColor','b');
+            s=scatter3(dominated(1,:), dominated(2, :), dominated(3, :), mrk_size*0.8, dominated(4, :)', 'o','MarkerFaceColor','b');
+            row=dataTipTextRow('W',dominated(4,:));
+            s.DataTipTemplate.DataTipRows(end+1)=row;
         else
-            scatter3(-1000, -1000 , -1000, mrk_size*0.8, 'o','MarkerFaceColor','b');
+            s=scatter3(-1000, -1000 , -1000, mrk_size*0.8, 'o','MarkerFaceColor','b');
         end
 
         % dodaj legende i ustaw osie
@@ -225,6 +233,8 @@ function plotInputs(fig, input, compared, nonDominated, dominated, tit, last)
         hold off
         axis([ min(input(1,:))-0.5 max(input(1,:))+0.5 min(input(2,:))-0.5 max(input(2,:))+0.5 min(input(3,:))-0.5 max(input(3,:))+0.5]);
         colorbar
+        
+        
     end
     title(tit);
 end
